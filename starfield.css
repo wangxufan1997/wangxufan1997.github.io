@@ -1,0 +1,9 @@
+/* 星空粒子特效Canvas全屏覆盖，鼠标移动时粒子扩散，粒子为发光圆点 */
+#starfield-canvas {
+  position: fixed;
+  z-index: 0;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* 不阻挡页面交互 */
+}

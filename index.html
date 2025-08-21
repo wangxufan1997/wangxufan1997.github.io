@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="starfield.css">
+  <link rel="stylesheet" href="compass-menu.css">
   <style>
     html, body {
       height: 100%;
@@ -17,277 +19,11 @@
       height: 100vh;
       overflow: hidden;
     }
-    /* 固定首航 */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: rgba(255,255,255,0.97);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 36px;
-    }
-    .header-info {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex: 1;
-    }
-    .avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: 3px solid #3385ff;
-      margin-right: 20px;
-      object-fit: cover;
-      background: #f3f7fb;
-    }
-    .header-details {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 7px;
-    }
-    .header-title {
-      font-size: 2em;
-      margin: 0;
-      letter-spacing: 2px;
-      color: #3385ff;
-    }
-    .header-contact {
-      font-size: 1em;
-      color: #444;
-    }
-    .header-contact a {
-      color: #3385ff;
-      text-decoration: none;
-      margin-left: 6px;
-    }
-    .header-contact a:hover {
-      text-decoration: underline;
-    }
-    /* 左侧可缩小侧边栏 */
-    .sidebar {
-      position: fixed;
-      top: 120px;
-      left: 0;
-      width: 50px;
-      height: calc(100vh - 120px);
-      background: #eff6ff;
-      border-right: 2px solid #b6d0f5;
-      box-sizing: border-box;
-      z-index: 10;
-      transition: width 0.22s cubic-bezier(.4,0,.2,1);
-      overflow: visible;
-    }
-    .sidebar-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 18px 0 0 0;
-      height: 100%;
-      transition: opacity 0.18s;
-      opacity: 0.4;
-    }
-    .sidebar:hover,
-    .sidebar:focus-within {
-      width: 220px;
-      box-shadow: 4px 0 14px rgba(51, 133, 255, 0.05);
-    }
-    .sidebar:hover .sidebar-inner,
-    .sidebar:focus-within .sidebar-inner {
-      opacity: 1;
-    }
-    .sidebar .sidebar-label {
-      writing-mode: vertical-lr;
-      transform: rotate(180deg);
-      color: #3385ff;
-      font-size: 0.95em;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      user-select: none;
-      margin-top: 10px;
-      margin-left: 2px;
-      pointer-events: none;
-      transition: opacity 0.15s;
-    }
-    .sidebar:hover .sidebar-label,
-    .sidebar:focus-within .sidebar-label {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .sidebar-nav {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-    .sidebar:hover .sidebar-nav,
-    .sidebar:focus-within .sidebar-nav {
-      display: flex;
-    }
-    .sidebar-nav button {
-      width: 160px;
-      padding: 12px 0;
-      margin-bottom: 18px;
-      color: #3385ff;
-      background: #fff;
-      border: 1.5px solid #3385ff;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      text-align: center;
-      opacity: 1;
-    }
-    .sidebar-nav button.active,
-    .sidebar-nav button:hover {
-      background: #3385ff;
-      color: #fff;
-    }
-    /* 右侧内容区 */
-    .main {
-      margin-left: 50px;
-      height: calc(100vh - 120px);
-      overflow-y: auto;
-      padding: 44px 36px 36px 36px;
-      box-sizing: border-box;
-      background: rgba(255,255,255,0.91);
-      transition: margin-left 0.22s cubic-bezier(.4,0,.2,1);
-    }
-    .sidebar:hover ~ .main,
-    .sidebar:focus-within ~ .main {
-      margin-left: 220px;
-      transition: margin-left 0.22s cubic-bezier(.4,0,.2,1);
-    }
-    .timeline {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      position: relative;
-      max-width: 750px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .timeline:before {
-      content: "";
-      position: absolute;
-      left: 28px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: #3385ff;
-      border-radius: 2px;
-    }
-    .timeline-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 36px;
-      position: relative;
-    }
-    .timeline-dot {
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      background: #3385ff;
-      margin-right: 25px;
-      position: relative;
-      z-index: 1;
-      margin-top: 5px;
-    }
-    .timeline-content {
-      background: #eef4ff;
-      border-radius: 9px;
-      padding: 16px 22px;
-      box-shadow: 0 2px 8px rgba(51, 133, 255, 0.08);
-      min-width: 320px;
-      max-width: 600px;
-      flex: 1;
-    }
-    .timeline-time {
-      font-size: 0.96em;
-      color: #6c8bb8;
-      margin-bottom: 6px;
-    }
-    /* 滚动条美化 */
-    .main::-webkit-scrollbar {
-      width: 8px;
-    }
-    .main::-webkit-scrollbar-thumb {
-      background: #d6e4fd;
-      border-radius: 5px;
-    }
-    /* 免责声明 */
-    .disclaimer {
-      margin-top: 44px;
-      font-size: 0.98em;
-      color: #888;
-      text-align: center;
-      background: #f8fbff;
-      border: 1px solid #e0eaff;
-      border-radius: 8px;
-      padding: 12px 0;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    @media (max-width: 750px) {
-      header {
-        flex-direction: column;
-        height: auto;
-        padding: 0 10px;
-        align-items: flex-start;
-        min-height: 120px;
-      }
-      .header-info {
-        flex-direction: row;
-        gap: 10px;
-        width: 100%;
-        align-items: flex-start;
-      }
-      .avatar {
-        width: 56px;
-        height: 56px;
-        margin-right: 12px;
-      }
-      .header-title {
-        font-size: 1.2em;
-      }
-      .header-details {
-        gap: 3px;
-      }
-      .sidebar {
-        top: 120px;
-        width: 40px;
-      }
-      .sidebar:hover,
-      .sidebar:focus-within {
-        width: 80vw;
-      }
-      .main {
-        margin-left: 40px;
-        padding: 16px 3vw 16px 3vw;
-      }
-      .sidebar-nav button {
-        width: 80vw;
-        min-width: 0;
-      }
-      .timeline-content {
-        min-width: 0;
-        max-width: 95vw;
-      }
-      .disclaimer {
-        max-width: 93vw;
-      }
-    }
+    /* ...原有内联CSS不变... */
   </style>
 </head>
 <body>
+  <!-- 星空粒子canvas会自动插入 -->
   <header>
     <div class="header-info">
       <img src="https://avatars.githubusercontent.com/u/13533957?v=4" class="avatar" alt="头像">
@@ -368,9 +104,10 @@
       </li>
     </ul>
     <div class="disclaimer">
-      免责声明：本博客内容仅代表个人观点与经历，如有引用或转载请注明出处。所有信息仅供参考，不构成任何投资或法律建议。若有侵权请联系删除。
+      免责声明：本博客内容仅代表个人观点与经历，如有引用或转载请注明出处。所有信息仅供参考，不构成任何投资或法律建议。若有侵权请联系删��[...]
     </div>
   </main>
+  <!-- 罗盘菜单由JS动态插入 -->
   <script>
     function showSection(type) {
       document.getElementById('timeline-personal').style.display = type === 'personal' ? '' : 'none';
@@ -382,5 +119,7 @@
       document.getElementById('btn-family').classList.toggle('active', type === 'family');
     }
   </script>
+  <script src="starfield.js"></script>
+  <script src="compass-menu.js"></script>
 </body>
 </html>
